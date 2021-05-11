@@ -1,0 +1,14 @@
+C:\Users\Pavel\source\repos\SappNET\bin\Debug\SappNET.exe.config
+C:\Users\Pavel\source\repos\SappNET\bin\Debug\SappNET.exe
+C:\Users\Pavel\source\repos\SappNET\bin\Debug\SappNET.pdb
+C:\Users\Pavel\source\repos\SappNET\obj\Debug\SappNET.csprojAssemblyReference.cache
+C:\Users\Pavel\source\repos\SappNET\obj\Debug\MainWindow.g.cs
+C:\Users\Pavel\source\repos\SappNET\obj\Debug\App.g.cs
+C:\Users\Pavel\source\repos\SappNET\obj\Debug\SappNET_MarkupCompile.cache
+C:\Users\Pavel\source\repos\SappNET\obj\Debug\SappNET_MarkupCompile.lref
+C:\Users\Pavel\source\repos\SappNET\obj\Debug\MainWindow.baml
+C:\Users\Pavel\source\repos\SappNET\obj\Debug\SappNET.g.resources
+C:\Users\Pavel\source\repos\SappNET\obj\Debug\SappNET.Properties.Resources.resources
+C:\Users\Pavel\source\repos\SappNET\obj\Debug\SappNET.csproj.GenerateResource.cache
+C:\Users\Pavel\source\repos\SappNET\obj\Debug\SappNET.exe
+C:\Users\Pavel\source\repos\SappNET\obj\Debug\SappNET.pdb
