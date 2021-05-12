@@ -8,7 +8,17 @@ namespace SappNET.Core.Layers.Conv
 {
     public class Conv
     {
+        public List<Map> Maps { get; private set; }
 
-      //  public Conv(Map[] maps, )
+        public Conv()
+        {
+            this.Maps = new List<Map>();
+        }
+        public void AddMap(Map map)
+        {
+            this.Maps.Add(map);
+        }
+
+
     }
 }

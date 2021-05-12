@@ -25,12 +25,13 @@ namespace SappNET
         public MainWindow()
         {
             InitializeComponent();
-            TestInput Input = new TestInput(4, 4, 1);
+            TestInput Input = new TestInput(48, 48, 1);
 
-            Map conv3_8x8 = new Map(new Kernel(Kernel.X2()));
+            Conv conv5_44x44 = new Conv();
 
-            var t = conv3_8x8.GetValue(Input.Value);
-            var res = t;
+            conv5_44x44.AddMap(new Map(new Kernel(Kernel.X5())));
+
+            var res= 8;
 
         }
     }

@@ -19,7 +19,9 @@ namespace SappNET.Core.Layers.Conv
             this.Kernel = kernel;
         }
 
-        public int[] GetValue(int[] inputValue)
+        public int[] GetValue() => this.Value;
+
+        public void Process(int[] inputValue)
         {
             int InputSizeX = (int)Math.Sqrt(inputValue.Length);
 
@@ -54,7 +56,7 @@ namespace SappNET.Core.Layers.Conv
                
                }
             }
-            return this.Value;
+   
         }
 
 
