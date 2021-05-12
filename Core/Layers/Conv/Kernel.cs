@@ -8,6 +8,10 @@ namespace SappNET.Core.Layers.Conv
 {
     public class Kernel
     {
+        public static int[] X2() => new int[] { 1, 1, 1, 1 };
+        public static int[] X3() => new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        public static int[] X5() => new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+
         public int[] weight;
         public int Height { get; set; }
         public int Width { get; set; }
