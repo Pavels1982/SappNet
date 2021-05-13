@@ -11,7 +11,7 @@ namespace SappNET.Core.Layers.Conv
     {
         public int Height { get; private set; }
         public int Width { get; private set; }
-        public float[] Value { get; set; }
+        public float[,] Value { get; set; }
         public Kernel Kernel { get; set; }
         public int InputSizeX { get; set; }
 
@@ -22,46 +22,35 @@ namespace SappNET.Core.Layers.Conv
             InputSizeX = inputWidth;
             this.Height = (inputHeight - this.Kernel.Height + 1);
             this.Width = (inputWidth - this.Kernel.Width + 1);
-            this.Value = new float[this.Height * Width];
+            this.Value = new float[this.Height, this.Width];
         }
 
-        public float[] GetValue() => this.Value;
+        public float[,] GetValue() => this.Value;
 
-        public void InputValues(float[] inputValue)
+        public void InputValues(float[,] inputValue)
         {
-            int offset, w;
-            float sum = 0;
-            var tmp = 0;
-            int indexValue = 0;
-            int index = 0;
-
-            for (int y = 0; y < inputValue.Length; y+=2, tmp+=2)
+            
+            for (int iy = 0; iy < inputValue.GetLength(0) - this.Kernel.Height + 1; iy++)
             {
-                offset = y; w = 0;
-
-                if (tmp == InputSizeX) { tmp = 0; y += InputSizeX; offset += InputSizeX; }
-
-                if (tmp <= InputSizeX - this.Kernel.Width)
+                for (int ix = 0; ix < inputValue.GetLength(1) - this.Kernel.Width + 1; ix++)
                 {
 
-                    for (int i = 0; i < this.Kernel.weight.Length; i++)
+                    float sum = 0;
+                    for (int ky = 0; ky < this.Kernel.Height; ky++)
                     {
-                        index = offset + i;
-                        sum += this.Kernel.weight[i] * inputValue[index];
-                        w++;
-                        if (w >= this.Kernel.Width) { w = 0; offset += InputSizeX - this.Kernel.Width; }
-                        Debug.Write($"{index},");
+                        for (int kx = 0; kx < this.Kernel.Width; kx++)
+                        {
+                            int indexX = ix + kx;
+                            int indexY = iy + ky;
+                            sum += inputValue[indexX, indexY] * this.Kernel.weight[kx, ky];
+                           // Debug.Write($"{indexY},{indexX}|");
+                        }
                     }
-                    Debug.WriteLine($"");
-                    if (sum < 0) sum = 0;
-                    this.Value[indexValue++] = sum;
-                    sum = 0;
-             
-                    if (index == inputValue.Length - 1) break;
-
+                    //Debug.WriteLine($"");
+                    this.Value[iy, ix] = sum;
                 }
             }
-
+          
         }
 
 

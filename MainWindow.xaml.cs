@@ -26,12 +26,12 @@ namespace SappNET
         public MainWindow()
         {
             InitializeComponent();
-            TestInput Input = new TestInput(5, 5, 1);
+            TestInput Input = new TestInput(48, 48, 1);
 
             Conv conv1_44x44 = new Conv();
             Pool pool = new Pool();
-
-            conv1_44x44.AddMap(new Map(new Kernel(Kernel.X2()),5,5));
+            
+            conv1_44x44.AddMap(new Map(new Kernel(5,5),48,48));
 
             conv1_44x44.InputValues(Input.Value);
 

@@ -21,43 +21,34 @@ namespace SappNET.Core.Layers.Pool
 
         public void InputMaps(List<Map> inputMaps)
         {
-            maps = new List<float[]>();
             foreach (var map in inputMaps)
             {
-                float[] result = new float[map.InputSizeX / 2];
-                int offset, w;
-                float sum = 0;
-                var tmp = 0;
-                int indexValue = 0;
-                int index = 0;
-
-                for (int y = 0; y < map.Value.Length; y += 2, tmp += 2)
+                float[,] result = new float[map.Height /2, map.Width/2];
+                int indX = 0, indY = 0;
+                for (int iy = 0; iy < map.Value.GetLength(0) - 3; iy+=2, indY++)
                 {
-                    offset = y; w = 0;
-
-                    if (tmp == map.InputSizeX) { tmp = 0; y += map.InputSizeX; offset += map.InputSizeX; }
-
-                    if (tmp <= map.InputSizeX - 2)
+                    
+                    for (int ix = 0; ix < map.Value.GetLength(1) - 3; ix+=2, indX++)
                     {
-
-                        for (int i = 0; i <2; i++)
+                        float max = 0;
+                        for (int ky = 0; ky < 2; ky++)
                         {
-                            index = offset + i;
-                            sum += map.Value[index];
-                            w++;
-                            if (w >= 2) { w = 0; offset += map.InputSizeX - 2; }
-                            Debug.Write($"{index},");
+                            for (int kx = 0; kx < 2; kx++)
+                            {
+                                int indexX = ix + kx;
+                                int indexY = iy + ky;
+                                var val = map.Value[indexY, indexX];
+                                if (val > max) max = val;
+                                 Debug.Write($"{indY},{indX}|");
+                            }
+                          //  
                         }
                         Debug.WriteLine($"");
-                        if (sum < 0) sum = 0;
-                        result[indexValue++] = sum;
-                        sum = 0;
+                        result[indY, indX] = max;
 
-                        if (index == map.Value.Length - 1) break;
-                       
                     }
+                   
                 }
-                maps.Add(result);
             }
         }
 

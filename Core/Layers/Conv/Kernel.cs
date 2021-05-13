@@ -8,10 +8,6 @@ namespace SappNET.Core.Layers.Conv
 {
     public class Kernel
     {
-        public static float[] X2() => new float[] { 1, 1, 1, 1 };
-        public static float[] X3() => new float[] { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-    //    public static float[] X5() => new float[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-
         public static float[] X5() 
         {
             Random rnd = new Random();
@@ -24,7 +20,7 @@ namespace SappNET.Core.Layers.Conv
                 return result;
         }
 
-        public float[] weight;
+        public float[,] weight;
         public int Height { get; set; }
         public int Width { get; set; }
 
@@ -32,10 +28,11 @@ namespace SappNET.Core.Layers.Conv
         {
             this.Width = width;
             this.Height = height;
-            this.weight = new float[this.Width * this.Height];
+            this.weight = new float[this.Width, this.Height];
+            RandomWeight(-0.5f, 0.5f);
         }
 
-        public Kernel(float[] weight)
+        public Kernel(float[,] weight)
         {
 
             this.weight = weight;
@@ -44,17 +41,23 @@ namespace SappNET.Core.Layers.Conv
             this.Height = size;
         }
 
-        public float[] GetWeight() => this.weight;
+        public float[,] GetWeight() => this.weight;
 
 
-        public void RandomWeight(int min, int max)
+        public void RandomWeight(float min, float max)
         {
-            Random rnd = new Random();
 
-            for (int i = 0; i <= weight.Length - 1; i++)
+            Random rnd = new Random();
+            for (int ky = 0; ky < this.Height; ky++)
             {
-                this.weight[i] = rnd.Next(min, max);
+                for (int kx = 0; kx < this.Width; kx++)
+                {
+                    this.weight[ky, kx] = (float)rnd.Next((int)(min * 1000), (int)(max * 1000)) / 1000;
+
+                }
             }
+
+
 
         }
 
