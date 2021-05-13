@@ -9,55 +9,98 @@ namespace SappNET.Core.Layers.Conv
 {
     public class Map
     {
-        public int Height { get; set; }
-        public int Width { get; set; }
-        public int[] Value { get; set; }
+        public int Height { get; private set; }
+        public int Width { get; private set; }
+        public float[] Value { get; set; }
         public Kernel Kernel { get; set; }
+        public int InputSizeX { get; set; }
 
-        public Map(Kernel kernel)
+
+        public Map(Kernel kernel, int inputHeight, int inputWidth)
         {
             this.Kernel = kernel;
+            InputSizeX = inputWidth;
+            this.Height = (inputHeight - this.Kernel.Height + 1);
+            this.Width = (inputWidth - this.Kernel.Width + 1);
+            this.Value = new float[this.Height * Width];
         }
 
-        public int[] GetValue() => this.Value;
+        public float[] GetValue() => this.Value;
 
-        public void Process(int[] inputValue)
+        public void InputValues(float[] inputValue)
         {
-            int InputSizeX = (int)Math.Sqrt(inputValue.Length);
-
-            this.Value = new int[(InputSizeX - this.Kernel.Height + 1) * (InputSizeX - this.Kernel.Width + 1)];
             int offset, w;
-            int sum = 0;
+            float sum = 0;
             var tmp = 0;
             int indexValue = 0;
-            int index=0;
+            int index = 0;
 
-            for (int y = 0; y < inputValue.Length; y++, tmp++)
+            for (int y = 0; y < inputValue.Length; y+=2, tmp+=2)
             {
-                offset = y;   w = 0;
+                offset = y; w = 0;
 
-               if (tmp == InputSizeX) tmp = 0;
+                if (tmp == InputSizeX) { tmp = 0; y += InputSizeX; offset += InputSizeX; }
 
-               if (tmp <= InputSizeX - this.Kernel.Width)
-               {
-                    
-                  for (int i = 0; i < this.Kernel.weight.Length; i++)
-                  {
+                if (tmp <= InputSizeX - this.Kernel.Width)
+                {
+
+                    for (int i = 0; i < this.Kernel.weight.Length; i++)
+                    {
                         index = offset + i;
                         sum += this.Kernel.weight[i] * inputValue[index];
                         w++;
                         if (w >= this.Kernel.Width) { w = 0; offset += InputSizeX - this.Kernel.Width; }
-                        //Debug.Write($"{index},");
-                  }
-                  //Debug.WriteLine($"");
-                  this.Value[indexValue++] = sum;
-                  sum = 0;
-                  if (index == inputValue.Length - 1) break;
-               
-               }
+                        Debug.Write($"{index},");
+                    }
+                    Debug.WriteLine($"");
+                    if (sum < 0) sum = 0;
+                    this.Value[indexValue++] = sum;
+                    sum = 0;
+             
+                    if (index == inputValue.Length - 1) break;
+
+                }
             }
-   
+
         }
+
+
+        //public void InputValues(float[] inputValue)
+        //{
+        //    int offset, w;
+        //    float sum = 0;
+        //    var tmp = 0;
+        //    int indexValue = 0;
+        //    int index = 0;
+
+        //    for (int y = 0; y < inputValue.Length; y++, tmp++)
+        //    {
+        //        offset = y; w = 0;
+
+        //        if (tmp == InputSizeX) tmp = 0;
+
+        //        if (tmp <= InputSizeX - this.Kernel.Width)
+        //        {
+
+        //            for (int i = 0; i < this.Kernel.weight.Length; i++)
+        //            {
+        //                index = offset + i;
+        //                sum += this.Kernel.weight[i] * inputValue[index];
+        //                w++;
+        //                if (w >= this.Kernel.Width) { w = 0; offset += InputSizeX - this.Kernel.Width; }
+        //                Debug.Write($"{index},");
+        //            }
+        //            Debug.WriteLine($"");
+        //            if (sum < 0) sum = 0;
+        //            this.Value[indexValue++] = sum;
+        //            sum = 0;
+        //            if (index == inputValue.Length - 1) break;
+
+        //        }
+        //    }
+
+        //}
+
 
 
     }

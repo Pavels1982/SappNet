@@ -19,6 +19,16 @@ namespace SappNET.Core.Layers.Conv
             this.Maps.Add(map);
         }
 
+        public void InputValues(float[] input)
+        {
+            foreach (var map in Maps)
+            {
+                map.InputValues(input);
+            }
+        
+        }
+
+        public List<Map> GetMaps() => this.Maps;
 
     }
 }
