@@ -10,7 +10,7 @@ namespace SappNET.Core.Layers.Pool
 {
     public class Pool
     {
-        private List<float[]> maps;
+        private List<float[,]> maps = new List<float[,]>();
 
 
         public Pool() 
@@ -23,12 +23,13 @@ namespace SappNET.Core.Layers.Pool
         {
             foreach (var map in inputMaps)
             {
-                float[,] result = new float[map.Height /2, map.Width/2];
+                float[,] result = new float[map.Height / 2 , map.Width / 2];
                 int indX = 0, indY = 0;
-                for (int iy = 0; iy < map.Value.GetLength(0) - 3; iy+=2, indY++)
+
+                for (int iy = 0; iy < map.Value.GetLength(0) ; iy+=2, indY++)
                 {
-                    
-                    for (int ix = 0; ix < map.Value.GetLength(1) - 3; ix+=2, indX++)
+                    indX = 0;
+                    for (int ix = 0; ix < map.Value.GetLength(1) ; ix+=2, indX++)
                     {
                         float max = 0;
                         for (int ky = 0; ky < 2; ky++)
@@ -39,16 +40,17 @@ namespace SappNET.Core.Layers.Pool
                                 int indexY = iy + ky;
                                 var val = map.Value[indexY, indexX];
                                 if (val > max) max = val;
-                                 Debug.Write($"{indY},{indX}|");
+                             //   Debug.Write($"{indexY},{indexX},");
                             }
-                          //  
                         }
-                        Debug.WriteLine($"");
+                       // Debug.WriteLine($"max={max}");
                         result[indY, indX] = max;
-
+                        
                     }
                    
+
                 }
+                this.maps.Add(result);
             }
         }
 

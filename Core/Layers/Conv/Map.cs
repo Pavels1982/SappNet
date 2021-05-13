@@ -43,7 +43,7 @@ namespace SappNET.Core.Layers.Conv
                             int indexX = ix + kx;
                             int indexY = iy + ky;
                             sum += inputValue[indexX, indexY] * this.Kernel.weight[kx, ky];
-                           // Debug.Write($"{indexY},{indexX}|");
+                          //  Debug.Write($"{indexY},{indexX}|");
                         }
                     }
                     //Debug.WriteLine($"");

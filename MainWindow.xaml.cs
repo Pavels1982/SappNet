@@ -31,7 +31,7 @@ namespace SappNET
             Conv conv1_44x44 = new Conv();
             Pool pool = new Pool();
             
-            conv1_44x44.AddMap(new Map(new Kernel(5,5),48,48));
+            conv1_44x44.AddMap(new Map(new Kernel(3,3),48,48));
 
             conv1_44x44.InputValues(Input.Value);
 
