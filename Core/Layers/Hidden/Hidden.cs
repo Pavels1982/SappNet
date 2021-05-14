@@ -10,21 +10,17 @@ namespace SappNET.Core.Layers.Hidden
     {
         public Perceptron[] Perceptrons { get; set; }
 
-        public Hidden(int neuronCount, bool createWeight = false, int countWeight = 0)
+        public Hidden(int neuronCount, int countWeight = 0, bool createWeight = false )
         {
             this.Perceptrons = new Perceptron[neuronCount];
-            if (createWeight) CreateWeight(countWeight);
+          
+            if (createWeight)
+                for (int i = 0; i < this.Perceptrons.Length; i++)
+                {
+                    this.Perceptrons[i] = new Perceptron(countWeight, true);
+                }
         }
 
-
-        public void CreateWeight(int count)
-        {
-            for(int i =0; i< this.Perceptrons.Length;i++)
-            {
-                this.Perceptrons[i] = new Perceptron();
-                this.Perceptrons[i].CreateWeight(count);
-            }
-        }
 
         public void InputValues(float[,] input)
         {

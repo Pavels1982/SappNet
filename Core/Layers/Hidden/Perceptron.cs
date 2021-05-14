@@ -11,32 +11,32 @@ namespace SappNET.Core.Layers.Hidden
         public float[] weight { get; set; }
         public float Output { get; set; }
 
-        public Perceptron()
-        { 
-        }
-        public void CreateWeight(int count)
+        public Perceptron(int weightCount, bool createWeight = false)
         {
-            weight = new float[count];
-            Random rnd = new Random();
-            for (int i = 0; i < count; i++)
-            { 
-            weight[i] = (float)rnd.Next((int)(-0.5 * 1000), (int)(0.5 * 1000)) / 1000;
+            weight = new float[weightCount];
+
+            if (createWeight)
+            {
+                Random rnd = new Random();
+                for (int i = 0; i < weightCount; i++)
+                {
+                    weight[i] = (float)rnd.Next((int)(-0.5 * 1000), (int)(0.5 * 1000)) / 1000;
+                }
             }
         }
-
-
         public void InputData(float[,] inputData)
         {
             int ind = 0;
+            float inputValue = 0;
             for (int y = 0; y < inputData.Length; y++)
             {
                 for (int x = 0; x < inputData.Length; x++)
                 {
-                    weight[ind++] *= inputData[y, x];
+                    inputValue += inputData[y, x] * weight[ind++];
                 }
             }
 
-            Output = weight.Sum() > 0 ? Output: 0;
+            Output = inputValue > 0 ? Output: 0;
 
         }
 

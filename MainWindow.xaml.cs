@@ -42,7 +42,7 @@ namespace SappNET
 
             Conv conv1_44x44 = new Conv();
 
-            Hidden fully_160 = new Hidden(160, true, 16);
+            Hidden fully_160 = new Hidden(160, 16, true);
             Pool pool = new Pool();
             
             conv1_44x44.AddMap(new Map(new Kernel(5,5),48,48));
