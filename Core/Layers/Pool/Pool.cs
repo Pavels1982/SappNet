@@ -25,13 +25,15 @@ namespace SappNET.Core.Layers.Pool
             {
                 float[,] result = new float[map.Height / 2 , map.Width / 2];
                 int indX = 0, indY = 0;
-
-                for (int iy = 0; iy < map.Value.GetLength(0) ; iy+=2, indY++)
+                int l_0 = map.Value.GetLength(0);
+                int l_1 = map.Value.GetLength(1);
+                for (int iy = 0; iy < l_0; iy+=2, indY++)
                 {
                     indX = 0;
-                    for (int ix = 0; ix < map.Value.GetLength(1) ; ix+=2, indX++)
+                    for (int ix = 0; ix < l_1; ix+=2, indX++)
                     {
                         float max = 0;
+                        if (ix + 1 >= l_1 || iy + 1 >= l_0) { break; }
                         for (int ky = 0; ky < 2; ky++)
                         {
                             for (int kx = 0; kx < 2; kx++)
@@ -40,10 +42,10 @@ namespace SappNET.Core.Layers.Pool
                                 int indexY = iy + ky;
                                 var val = map.Value[indexY, indexX];
                                 if (val > max) max = val;
-                             //   Debug.Write($"{indexY},{indexX},");
+                               // Debug.Write($"{indexY},{indexX},");
                             }
                         }
-                       // Debug.WriteLine($"max={max}");
+                        //Debug.WriteLine($"max={max}");
                         result[indY, indX] = max;
                         
                     }

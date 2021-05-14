@@ -11,25 +11,26 @@ namespace SappNET.Core.Layers.Conv
         public static float[] X5() 
         {
             Random rnd = new Random();
+
             float[] result = new float[25];
+
             for (int i = 0; i < result.Length; i++)
             {
                 result[i] = (float)rnd.Next(-500, 500) / 1000;
-                
             }
-                return result;
+            return result;
         }
 
         public float[,] weight;
         public int Height { get; set; }
         public int Width { get; set; }
 
-        public Kernel(int height, int width)
+        public Kernel(int height, int width, bool createWeight = false)
         {
             this.Width = width;
             this.Height = height;
             this.weight = new float[this.Width, this.Height];
-            RandomWeight(-0.5f, 0.5f);
+            if (createWeight) RandomWeight(-0.5f, 0.5f);
         }
 
         public Kernel(float[,] weight)
@@ -56,8 +57,6 @@ namespace SappNET.Core.Layers.Conv
 
                 }
             }
-
-
 
         }
 

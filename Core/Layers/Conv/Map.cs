@@ -23,6 +23,7 @@ namespace SappNET.Core.Layers.Conv
             this.Height = (inputHeight - this.Kernel.Height + 1);
             this.Width = (inputWidth - this.Kernel.Width + 1);
             this.Value = new float[this.Height, this.Width];
+
         }
 
         public float[,] GetValue() => this.Value;
@@ -43,7 +44,7 @@ namespace SappNET.Core.Layers.Conv
                             int indexX = ix + kx;
                             int indexY = iy + ky;
                             sum += inputValue[indexX, indexY] * this.Kernel.weight[kx, ky];
-                          //  Debug.Write($"{indexY},{indexX}|");
+                            ///Debug.Write($"{indexY},{indexX}|");
                         }
                     }
                     //Debug.WriteLine($"");

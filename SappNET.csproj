@@ -65,7 +65,11 @@
     <Compile Include="Core\Layers\Conv\Conv.cs" />
     <Compile Include="Core\Layers\Conv\Kernel.cs" />
     <Compile Include="Core\Layers\Conv\Map.cs" />
+    <Compile Include="Core\Layers\Hidden\Hidden.cs" />
+    <Compile Include="Core\Layers\Hidden\Perceptron.cs" />
+    <Compile Include="Core\Layers\ILayer.cs" />
     <Compile Include="Core\Layers\Pool\Pool.cs" />
+    <Compile Include="Core\Network\Network.cs" />
     <Compile Include="Core\TestInput.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

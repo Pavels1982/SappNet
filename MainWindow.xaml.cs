@@ -1,6 +1,8 @@
 ﻿using SappNET.Core;
 using SappNET.Core.Layers.Conv;
+using SappNET.Core.Layers.Hidden;
 using SappNET.Core.Layers.Pool;
+using SappNET.Core.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +28,24 @@ namespace SappNET
         public MainWindow()
         {
             InitializeComponent();
+
             TestInput Input = new TestInput(48, 48, 1);
 
+            Network net = new Network();
+
+            net.AddLayer(new Conv(8,5,5,48,48,true));
+
+            net.Process(Input.Value);
+
+
+       
+
             Conv conv1_44x44 = new Conv();
+
+            Hidden fully_160 = new Hidden(160, true, 16);
             Pool pool = new Pool();
             
-            conv1_44x44.AddMap(new Map(new Kernel(3,3),48,48));
+            conv1_44x44.AddMap(new Map(new Kernel(5,5),48,48));
 
             conv1_44x44.InputValues(Input.Value);
 
