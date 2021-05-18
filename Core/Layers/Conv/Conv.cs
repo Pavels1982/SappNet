@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SappNET.Core.Layers.Conv
 {
+    [Serializable]
     public class Conv: ILayer
     {
         public List<Map> Maps { get; private set; } = new List<Map>();

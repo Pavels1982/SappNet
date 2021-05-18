@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SappNET.Core.Layers.Conv
 {
+    [Serializable]
     public class Map
     {
         public int Height { get; private set; }

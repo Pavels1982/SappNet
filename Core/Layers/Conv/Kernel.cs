@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SappNET.Core.Layers.Conv
 {
+    [Serializable]
     public class Kernel
     {
         public static float[] X5() 
@@ -37,9 +38,9 @@ namespace SappNET.Core.Layers.Conv
         {
 
             this.weight = weight;
-            var size = (int)Math.Sqrt(weight.Length);
-            this.Width = size;
-            this.Height = size;
+           
+            this.Width = weight.GetLength(1);
+            this.Height = weight.GetLength(0); 
         }
 
         public float[,] GetWeight() => this.weight;

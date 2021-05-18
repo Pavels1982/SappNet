@@ -5,7 +5,9 @@ using SappNET.Core.Layers.Pool;
 using SappNET.Core.Network;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,12 +35,20 @@ namespace SappNET
 
             Network net = new Network();
 
-            net.AddLayer(new Conv(8,5,5,48,48,true));
+            net.AddLayer(new Conv(190, 5, 5, 48, 48, true));
+            net.AddLayer(new Conv(260, 5, 5, 44, 44, true));
 
             net.Process(Input.Value);
 
+            long size = 0;
 
-       
+            using (Stream stream = new MemoryStream())
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, (object)net);
+                size = stream.Length;
+            }
+
 
             Conv conv1_44x44 = new Conv();
 

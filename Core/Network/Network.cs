@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SappNET.Core.Network
 {
+    [Serializable]
     public class Network
     {
         public List<ILayer> Layers = new List<ILayer>();
@@ -23,9 +24,10 @@ namespace SappNET.Core.Network
             Layers[0].InputValues(data);
 
             var name = Layers[0].GetType().Name;
+
             for (int l = 1; l < Layers.Count; l++)
             {
-               // name = Layers[l].GetType().Name;
+                if (Layers[l] != null) Layers[l].InputValues(Layers[l - 1].GetValues());
             }
         
         }

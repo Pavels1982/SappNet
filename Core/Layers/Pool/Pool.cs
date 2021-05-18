@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace SappNET.Core.Layers.Pool
 {
+    [Serializable]
     public class Pool
     {
-        private List<float[,]> maps = new List<float[,]>();
+        public List<float[,]> Maps { get; private set; } = new List<float[,]>();
 
 
         public Pool() 
@@ -52,7 +53,7 @@ namespace SappNET.Core.Layers.Pool
                    
 
                 }
-                this.maps.Add(result);
+                this.Maps.Add(result);
             }
         }
 
